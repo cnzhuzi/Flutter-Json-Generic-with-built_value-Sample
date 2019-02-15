@@ -4,11 +4,12 @@ a sample about: deserialize Json string to generic Json model with 'built_value'
 
 ## Getting Started
 
-As we know, 'built_value' is a powerful json serialize/deserialize lib, this sample mainly shows how to deal with generic deserialize, especially the nested generic. To tell the truth, it's very inconvenient compared with TypeScript\Java etc.
+As we know, 'built_value' is a powerful json serialize/deserialize lib, this sample mainly shows how to deal with generic deserialize, especially the nested generic. To tell the truth, it's very inconvenient compared with TypeScript\Java etc.🤯😥😂
 
-### **Step 1: add dependencies**
+### **Step 1: add dependencies in pubspec.yaml**
 
-`dependencies:`
+```yaml
+dependencies:
 
   flutter:
 
@@ -20,7 +21,7 @@ As we know, 'built_value' is a powerful json serialize/deserialize lib, this sam
 
   **built_value: ^6.3.0**
 
-`dev_dependencies:`
+dev_dependencies:
 
   flutter_test:
 
@@ -29,28 +30,43 @@ As we know, 'built_value' is a powerful json serialize/deserialize lib, this sam
   **build_runner: ^1.0.0**
 
   **built_value_generator: ^6.3.0**
+```
 
 
 
 ###  **Step 2: create json model**
 
 here is just a partial data from https://jsonplaceholder.typicode.com/users/2
- `{`
-  `"id": 2,`
-  `"name": "Ervin Howell",`
-  `"email": "Shanna@melissa.tv",`
-  `"address": {`
-    `"street": "Victor Plains",`
-    `"suite": "Suite 879",`
-    `"city": "Wisokyburgh",`
-    `"zipcode": "90566-7771",`
-    `"geo": {`
-      `"lat": "-43.9509",`
-      `"lng": "-34.4618"`
-    `}`
-  `},`
-  `"phone": "010-692-6593 x09125"`
-`}`
+
+In this sample, the generic can be similar to User<Address<Geo>>.
+Thanx to https://charafau.github.io/json2builtvalue/   we can convert json string to 'built_value' json model with it, and then edit related model to generics type. 
+
+```json
+{
+  "id": 2,
+  "name": "Ervin Howell",
+  "username": "Antonette",
+  "email": "Shanna@melissa.tv",
+  "address": {
+    "street": "Victor Plains",
+    "suite": "Suite 879",
+    "city": "Wisokyburgh",
+    "zipcode": "90566-7771",
+    "geo": {
+      "lat": "-43.9509",
+      "lng": "-34.4618"
+    }
+  },
+  "phone": "010-692-6593 x09125",
+  "website": "anastasia.net",
+  "company": {
+    "name": "Deckow-Crist",
+    "catchPhrase": "Proactive didactic contingency",
+    "bs": "synergize scalable supply-chains"
+  }
+}
+```
+
 In this sample, the generic can be similar to User<Address<Geo>>.
 Thanx to https://charafau.github.io/json2builtvalue/   we can convert json string to 'built_value' json model with it, and then edit related model to generics type. 
 
@@ -58,7 +74,8 @@ Thanx to https://charafau.github.io/json2builtvalue/   we can convert json strin
 
 ### **Step 3: add build factory for generics in serializers.**
 
-`@SerializersFor(const [`
+```dart
+@SerializersFor(const [
 
   User,
 
@@ -66,9 +83,9 @@ Thanx to https://charafau.github.io/json2builtvalue/   we can convert json strin
 
   Geo,
 
-`])`
+])
 
-`final Serializers serializers = (_$serializers.toBuilder()`
+final Serializers serializers = (_$serializers.toBuilder()
 
 ​      ..addBuilderFactory(
 
@@ -86,13 +103,15 @@ Thanx to https://charafau.github.io/json2builtvalue/   we can convert json strin
 
 ​      ..addPlugin(StandardJsonPlugin()))
 
-​    `.build();`
+​    .build();
+```
 
 
 
 ### **Step 4: fetch data and deserialize**
 
-`Future<User<Address<Geo>>> getUser() async {`
+```dart
+Future<User<Address<Geo>>> getUser() async {
 
   final response =
 
@@ -116,4 +135,6 @@ Thanx to https://charafau.github.io/json2builtvalue/   we can convert json strin
 
   }
 
-`}`
+}
+```
+
