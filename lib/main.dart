@@ -45,7 +45,7 @@ class MyApp extends StatelessWidget {
             builder: (context, snapshot) {
               if (snapshot.hasData) {
                 return Text(
-                    'Name: ${snapshot.data.name}\n\nAddress-Street: ${snapshot.data.address.street}\nAddress-City:${snapshot.data.address.city}\n\nLongitude: ${snapshot.data.address.geo.lng}\nLatitude: ${snapshot.data.address.geo.lat}');
+                    'Name: ${snapshot.data.name}\n\nAddress-Street: ${snapshot.data.address.street}\nAddress-City: ${snapshot.data.address.city}\n\nLongitude: ${snapshot.data.address.geo.lng}\nLatitude: ${snapshot.data.address.geo.lat}');
               } else if (snapshot.hasError) {
                 return Text("${snapshot.error}");
               }
