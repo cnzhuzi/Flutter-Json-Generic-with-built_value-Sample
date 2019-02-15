@@ -1,5 +1,7 @@
 # flutter_json_generic_with_built_value
 
+eg: json string => **`User<Address<Geo>>`**
+
 a sample about: deserialize Json string to generic Json model with 'built_value'
 
 ## Getting Started
@@ -13,7 +15,7 @@ dependencies:
 
   flutter:
 
-​    sdk: flutter
+    sdk: flutter
 
   cupertino_icons: ^0.1.2
 
@@ -25,7 +27,7 @@ dev_dependencies:
 
   flutter_test:
 
-​    sdk: flutter
+    sdk: flutter
 
   **build_runner: ^1.0.0**
 
@@ -34,14 +36,14 @@ dev_dependencies:
 
 
 
-###  **Step 2: create json model**
+### **Step 2: create json model**
 
 here is just a partial test data from https://jsonplaceholder.typicode.com/users/2
+
 ```json
-{
+ {
   "id": 2,
   "name": "Ervin Howell",
-  "username": "Antonette",
   "email": "Shanna@melissa.tv",
   "address": {
     "street": "Victor Plains",
@@ -53,16 +55,11 @@ here is just a partial test data from https://jsonplaceholder.typicode.com/users
       "lng": "-34.4618"
     }
   },
-  "phone": "010-692-6593 x09125",
-  "website": "anastasia.net",
-  "company": {
-    "name": "Deckow-Crist",
-    "catchPhrase": "Proactive didactic contingency",
-    "bs": "synergize scalable supply-chains"
-  }
+  "phone": "010-692-6593 x09125"
 }
 ```
-In this sample, the generic can be similar to User<Address<Geo>>.
+
+In this sample, the generic can be similar to **`User<Address<Geo>>`**.
 Thanx to https://charafau.github.io/json2builtvalue/   we can convert json string to 'built_value' json model with it, and then edit related model to generics style. 
 
 
@@ -82,23 +79,23 @@ Thanx to https://charafau.github.io/json2builtvalue/   we can convert json strin
 
 final Serializers serializers = (_$serializers.toBuilder()
 
-​      ..addBuilderFactory(
+      ..addBuilderFactory(
 
-​          FullType(User, const [
+          FullType(User, const [
 
-​            const FullType(Address, const [const FullType(Geo)])
+            const FullType(Address, const [const FullType(Geo)])
 
-​          ]),
+          ]),
 
-​          () => new UserBuilder<Address<Geo>>())
+          () => new UserBuilder<Address<Geo>>())
 
-​      ..addBuilderFactory(FullType(Address, const [const FullType(Geo)]),
+      ..addBuilderFactory(FullType(Address, const [const FullType(Geo)]),
 
-​          () => new AddressBuilder<Geo>())
+          () => new AddressBuilder<Geo>())
 
-​      ..addPlugin(StandardJsonPlugin()))
+      ..addPlugin(StandardJsonPlugin()))
 
-​    .build();
+    .build();
 ```
 
 
@@ -110,26 +107,25 @@ Future<User<Address<Geo>>> getUser() async {
 
   final response =
 
-​      await http.get('https://jsonplaceholder.typicode.com/users/2');
+      await http.get('https://jsonplaceholder.typicode.com/users/2');
 
   if (response.statusCode == 200) {
 
-​    User user = serializers.deserialize(json.decode(response.body),
+    User user = serializers.deserialize(json.decode(response.body),
 
-​        specifiedType: FullType(User, const [
+        specifiedType: FullType(User, const [
 
-​          const FullType(Address, const [const FullType(Geo)])
+          const FullType(Address, const [const FullType(Geo)])
 
-​        ]));
+        ]));
 
-​    return user;
+    return user;
 
   } else {
 
-​    throw Exception('Failed to get user');
+    throw Exception('Failed to get user');
 
   }
 
 }
 ```
-
