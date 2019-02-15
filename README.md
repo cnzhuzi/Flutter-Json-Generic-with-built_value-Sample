@@ -68,7 +68,7 @@ Thanx to https://charafau.github.io/json2builtvalue/   we can convert json strin
 ```
 
 In this sample, the generic can be similar to User<Address<Geo>>.
-Thanx to https://charafau.github.io/json2builtvalue/   we can convert json string to 'built_value' json model with it, and then edit related model to generics type. 
+Thanx to https://charafau.github.io/json2builtvalue/   we can convert json string to 'built_value' json model with it, and then edit related model to generics style. 
 
 
 
