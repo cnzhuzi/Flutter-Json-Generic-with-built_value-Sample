@@ -36,11 +36,7 @@ dev_dependencies:
 
 ###  **Step 2: create json model**
 
-here is just a partial data from https://jsonplaceholder.typicode.com/users/2
-
-In this sample, the generic can be similar to User<Address<Geo>>.
-Thanx to https://charafau.github.io/json2builtvalue/   we can convert json string to 'built_value' json model with it, and then edit related model to generics type. 
-
+here is just a partial test data from https://jsonplaceholder.typicode.com/users/2
 ```json
 {
   "id": 2,
@@ -66,7 +62,6 @@ Thanx to https://charafau.github.io/json2builtvalue/   we can convert json strin
   }
 }
 ```
-
 In this sample, the generic can be similar to User<Address<Geo>>.
 Thanx to https://charafau.github.io/json2builtvalue/   we can convert json string to 'built_value' json model with it, and then edit related model to generics style. 
 
